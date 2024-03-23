@@ -24,8 +24,8 @@ public class LoginForBankTest {
         cleanAuthCodes();
     }
 
-    @AfterEach
-    void tearDownAll() {
+    @AfterAll
+    static void tearDownAll() {
         cleanDatabase();
     }
 
@@ -57,9 +57,8 @@ public class LoginForBankTest {
     void shouldGetErrorNotificationIfLoginWithRandomUserWithoutAddingToBase() {
         var authInfo = DataHelper.generateRandomUser();
         loginPage.validLogin(authInfo);
-        loginPage.verifyErrorNotification("Ошибка. Неверно указан логин или \nпароль");
+        loginPage.verifyErrorNotification("Ошибка! Неверно указан логин или \nпароль");
     }
-
 
     @Test
     @DisplayName("Should get error notification if login with exist in base and active user and random verification code")
@@ -69,6 +68,6 @@ public class LoginForBankTest {
         verificationPage.verifyVerificationPageVisiblity();
         var verificationCode = DataHelper.generateRandomVerificationCode();
         verificationPage.verify(verificationCode.getCode());
-        verificationPage.verifyErrorNotification("Ошибка. Неверно указан код! \nПоробуйте еще раз.");
+        verificationPage.verifyErrorNotification("Ошибка!   Неверно указан код! Попробуйте ещё раз.");
     }
 }
